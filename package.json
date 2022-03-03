@@ -5,7 +5,8 @@
   "main": "./app/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./app/server.ts"
+    "start": "nodemon ./app/server.ts",
+    "build": "tsc --project ./"
   },
   "repository": {
     "type": "git",
