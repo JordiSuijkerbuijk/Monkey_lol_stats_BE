@@ -1,5 +1,5 @@
 import express from 'express';
-import controller from '../controllers/clashController/clashController';
+import controller from '../controllers/clashController';
 
 const router = express.Router();
 

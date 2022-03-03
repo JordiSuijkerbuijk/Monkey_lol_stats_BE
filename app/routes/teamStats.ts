@@ -1,5 +1,5 @@
 import express from 'express';
-import controller from '../controllers/teamStatsControllers/teamStatsController';
+import controller from '../controllers/teamStatsController';
 
 const router = express.Router();
 
