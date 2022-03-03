@@ -1,0 +1,20 @@
+{
+    "players": [
+        {
+            "name": "...",
+            "puuid": "...",
+            "champion": "..."
+        }
+    ],
+    "matchId": "",
+    "timestamp": "",
+    "duration": "",
+    "win": "",
+    "richboi": "username?",
+    "brokeBoi": "username?",
+    "role": "",
+    "bestKDA": "username?",
+    "worstKDA": "username?",
+    "killer": "",
+    "helpingHand": ""
+}
