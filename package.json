@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/JordiSuijkerbuijk/Monkey_lol_stats_BE#readme",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "ts-node": "8.10.2",
     "typescript": "3.9.5"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
   }
 }
