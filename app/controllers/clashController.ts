@@ -1,7 +1,9 @@
-import { Request, Response } from 'express';
-
-const getTest = async (req: Request, res: Response) => {
-    res.send();
+type Player = {
+    summonerId: string
 }
 
-export default {getTest}
+function getClashBySummoner(summonerId: number): Player {
+    return {summonerId: '1'}
+}
+
+export default {getClashBySummoner}
