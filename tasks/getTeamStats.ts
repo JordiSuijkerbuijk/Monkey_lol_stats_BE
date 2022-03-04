@@ -17,17 +17,17 @@ monkeys.forEach((monkey) => {
     console.log(summonerId);
     getMatchHistory(summonerId).then((matchHistory) => {
       getMatchDetails(matchHistory[0]).then((matchDetails) => {
-        const stats = collectData(matchDetails);
+        console.log(matchDetails);
+        // const stats = collectData(matchDetails);
         // Write insert firbase
       });
       // matchHistory.forEach((matchId) => {
-
       // });
     });
   });
 });
 
-async function getSummonerId(monkey) {
+async function getSummonerId(monkey:String) {
   const summonerData = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${monkey}`, {
     headers: {
       'X-Riot-Token': process.env.RIOTKEY,
@@ -39,7 +39,7 @@ async function getSummonerId(monkey) {
   return summonerJson.puuid;
 }
 
-async function getMatchHistory(summonerId) {
+async function getMatchHistory(summonerId:String) {
   const matchHistory = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${summonerId}/ids?start=0&count=100`, {
     headers: {
       'X-Riot-Token': process.env.RIOTKEY,
@@ -49,19 +49,17 @@ async function getMatchHistory(summonerId) {
   return await matchHistory.json();
 }
 
-async function getMatchDetails(matchId) {
+async function getMatchDetails(matchId:String) {
   const matchDetails = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}`, {
     headers: {
       'X-Riot-Token': process.env.RIOTKEY,
     },
   });
 
-  const matchJson = await matchDetails.json();
-
-  console.log(matchJson.info);
+  return await matchDetails.json();
 }
 
-async function collectData(matchDetails) {
+async function collectData(matchDetails:any) {
   console.log(matchDetails);
   // check if monkeys were in there togeter
   // yes
