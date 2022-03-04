@@ -1,6 +1,9 @@
-// import 'dotenv/config';
 require('dotenv').config();
 const fetch = require('node-fetch');
+const db = require('../utils/db.ts');
+
+import { RiotClass } from '../utils/riot';
+const riotUtil = new RiotClass(process.env.RIOTKEY);
 
 // Steps get recent 100 matches
 // check if people played together
@@ -10,56 +13,25 @@ const fetch = require('node-fetch');
 // The data needs to be ready for a direct return on the api
 
 // Replace with call to firestore later on when processing is finished
-const monkeys = ['Stoned5Life'];
-
-monkeys.forEach((monkey) => {
-  getSummonerId(monkey).then((summonerId) => {
-    console.log(summonerId);
-    getMatchHistory(summonerId).then((matchHistory) => {
-      getMatchDetails(matchHistory[0]).then((matchDetails) => {
-        console.log(matchDetails);
-        // const stats = collectData(matchDetails);
-        // Write insert firbase
+// Also refractor the part where we get summonerId because we will save that in the DB;
+db.collection('summoners')
+  .get()
+  .then((monkeys:any) => {
+    monkeys.forEach((monkey:any) => {
+      const summonerId = monkey.data().puuid;
+      console.log(summonerId);
+      riotUtil.getMatchHistory(summonerId).then((matchHistory) => {
+        riotUtil.getMatchDetails(matchHistory[0]).then((matchDetails) => {
+          console.log(matchDetails);
+          // const stats = collectData(matchDetails);
+          return;
+        });
       });
-      // matchHistory.forEach((matchId) => {
-      // });
     });
   });
-});
 
-async function getSummonerId(monkey:String) {
-  const summonerData = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${monkey}`, {
-    headers: {
-      'X-Riot-Token': process.env.RIOTKEY,
-    },
-  });
 
-  const summonerJson = await summonerData.json();
-
-  return summonerJson.puuid;
-}
-
-async function getMatchHistory(summonerId:String) {
-  const matchHistory = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${summonerId}/ids?start=0&count=100`, {
-    headers: {
-      'X-Riot-Token': process.env.RIOTKEY,
-    },
-  });
-
-  return await matchHistory.json();
-}
-
-async function getMatchDetails(matchId:String) {
-  const matchDetails = await fetch(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}`, {
-    headers: {
-      'X-Riot-Token': process.env.RIOTKEY,
-    },
-  });
-
-  return await matchDetails.json();
-}
-
-async function collectData(matchDetails:any) {
+async function collectData(matchDetails:string) {
   console.log(matchDetails);
   // check if monkeys were in there togeter
   // yes
