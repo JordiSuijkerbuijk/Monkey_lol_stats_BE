@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec62fd4f-2dbc-453c-8392-03aaa67b5869" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="25t0y3UqrM6NczNhuqt02vZdlhS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec62fd4f-2dbc-453c-8392-03aaa67b5869" name="Default Changelist" comment="" />
+      <created>1646331325886</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1646331325886</updated>
+      <workItem from="1646331327095" duration="700000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added firebase connect with DB util">
+      <created>1646331380490</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646331380491</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added firebase connect with DB util" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added firebase connect with DB util" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="144" y="94" key="MergeDialog" timestamp="1646331350671">
+      <screen x="0" y="25" width="1440" height="822" />
+    </state>
+    <state x="144" y="94" key="MergeDialog/0.25.1440.822/-130.-1055.1920.1055@0.25.1440.822" timestamp="1646331350671" />
+    <state x="354" y="194" key="MultipleFileMergeDialog" timestamp="1646331350760">
+      <screen x="0" y="25" width="1440" height="822" />
+    </state>
+    <state x="354" y="194" key="MultipleFileMergeDialog/0.25.1440.822/-130.-1055.1920.1055@0.25.1440.822" timestamp="1646331350760" />
+    <state x="320" y="169" key="Vcs.Push.Dialog.v2" timestamp="1646331421014">
+      <screen x="0" y="25" width="1440" height="822" />
+    </state>
+    <state x="320" y="169" key="Vcs.Push.Dialog.v2/0.25.1440.822/-130.-1055.1920.1055@0.25.1440.822" timestamp="1646331421014" />
+  </component>
+</project>
