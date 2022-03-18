@@ -1,18 +1,42 @@
-import type { Champion } from "../interfaces/championInterface";
+import type { Champion } from '../interfaces/championInterface';
 
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 
-export const getChampionFromJson = async (array: Array<number>): Promise<Array<Champion>> => {
-    const response = await fetch('http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json')
+export const getChampionsFromJson = async (): Promise<Array<Champion> | boolean> => {
+  const response = await fetch(
+    'http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json'
+  );
 
-    const championJson = await response.json();
+  const championJson = await response.json();
 
+  if (championJson) {
+    const array: Array<Champion> = Object.values(championJson.data);
+    return array;
+  }
+
+  return false;
+};
+
+export const getFreeChampionFromJson = async (
+  array: Array<number>
+): Promise<Array<Champion> | boolean> => {
+  const response = await fetch(
+    'http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json'
+  );
+
+  const championJson = await response.json();
+
+  if (array) {
     const data: Array<Champion> = array.map((item: number) => {
-        const championData = championJson.data;
-        const championKey = Object.keys(championData).find((key: string) => championData[key].key === `${item}`) || '';
+      const championData = championJson.data;
+      const championKey =
+        Object.keys(championData).find((key: string) => championData[key].key === `${item}`) || '';
 
-        return championData[championKey];
+      return championData[championKey];
     });
 
     return data;
-}
+  }
+
+  return false;
+};
