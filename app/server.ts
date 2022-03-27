@@ -6,10 +6,6 @@ const app = express();
 const port = 3000;
 const firebase = require('./firebase');
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
-
 app.get('/firestore', (req: Request, res: Response) => firebase(req, res));
 
 app.use('/clash', clashRoute);

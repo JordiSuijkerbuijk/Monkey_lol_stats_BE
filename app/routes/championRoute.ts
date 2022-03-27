@@ -20,6 +20,18 @@ router.get('/', async (req: Request, res: Response) => {
   return;
 });
 
+router.get('/rotation', async (req: Request, res: Response) => {
+  const rotation = await getFreeChampionRotation('euw1');
+
+  if (!rotation) {
+    res.status(404).send({ error: 'Not able to find the free champion rotation' });
+    return;
+  }
+
+  res.status(200).send({ data: rotation });
+  return;
+});
+
 router.get('/:champion', async (req: Request, res: Response) => {
   const params = req.params;
 
@@ -36,18 +48,6 @@ router.get('/:champion', async (req: Request, res: Response) => {
   }
 
   res.status(200).send({ data: champion });
-  return;
-});
-
-router.get('/rotation', async (req: Request, res: Response) => {
-  const rotation = await getFreeChampionRotation('euw1');
-
-  if (!rotation) {
-    res.status(404).send({ error: 'Not able to find the free champion rotation' });
-    return;
-  }
-
-  res.status(200).send({ data: rotation });
   return;
 });
 

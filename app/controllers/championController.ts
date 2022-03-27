@@ -41,7 +41,7 @@ export async function getFreeChampionRotation(region: string): Promise<Array<Cha
     {
       method: 'GET',
       headers: {
-        'X-Riot-Token': 'RGAPI-71c8cf84-53e5-4507-b2cf-065ecc1c0ba0',
+        'X-Riot-Token': 'RGAPI-745807f9-c21c-43fc-bebc-91444e504218',
       },
     }
   );
