@@ -1,4 +1,4 @@
-import type { Champion } from '../interfaces/championInterface';
+import type { Champion, ChampionTag } from '../interfaces/championInterface';
 
 import { getChampionsFromJson, getFreeChampionFromJson } from '../services/championService';
 
@@ -55,4 +55,22 @@ export async function getFreeChampionRotation(region: string): Promise<Array<Cha
   const freeChampions = await getFreeChampionFromJson(freeChampionRotationData.freeChampionIds);
 
   return freeChampions;
+}
+
+export async function getChampionsWithType(championClass: ChampionTag): Promise<Array<Champion> | boolean > {
+  const champions = await getChampionsFromJson();
+
+  if(!champions) {
+    return false;
+  }
+
+  if(!Array.isArray(champions)) {
+    return false;
+  }
+
+  const championsWithClass = champions.filter(champ => {
+    return champ.tags.indexOf(championClass) >= 0
+  }) 
+
+  return championsWithClass
 }

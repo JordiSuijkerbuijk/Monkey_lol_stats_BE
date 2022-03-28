@@ -4,6 +4,8 @@ export interface ChampionRotation {
     freeChampionIds: Array<number>
 }
 
+export type ChampionTag =  'Mage' | 'Support' | 'Fighter' | 'Tank' | 'Marksman' | 'Assassin'
+
 export interface Champion {
     id: string,
     key: string,
@@ -12,7 +14,7 @@ export interface Champion {
     blurb: string,
     info: ChampionInfo,
     image: ChampionImage,
-    tags: Array<'Mage' | 'Support' | 'Fighter' | 'Tank' | 'Marksman' | 'Assassin'>,
+    tags: ChampionTag[],
     partype: string,
     stats: ChampionStats,
 }

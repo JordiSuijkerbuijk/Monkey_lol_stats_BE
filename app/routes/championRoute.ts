@@ -4,7 +4,10 @@ import {
   getFreeChampionRotation,
   getChampions,
   getSingleChampion,
+  getChampionsWithType
 } from '../controllers/championController';
+
+import { ChampionTag } from '../interfaces/championInterface';
 
 const router = express.Router();
 
@@ -50,5 +53,23 @@ router.get('/:champion', async (req: Request, res: Response) => {
   res.status(200).send({ data: champion });
   return;
 });
+
+router.get('/type/:type', async(req: Request, res: Response) => {
+  const params = req.params;
+  if(!params || !params.type) {
+    res.status(400).send({error: "No type was found in request"})
+    return;
+  }
+
+  const champions = await getChampionsWithType(params.type as ChampionTag);
+
+  if(!champions) {
+    res.status(404).send({ error: "Not able to find champions with type"});
+    return;
+  }
+
+  res.status(200).send({ data: champions});
+  return
+})
 
 export = router;
