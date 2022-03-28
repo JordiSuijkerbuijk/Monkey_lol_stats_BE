@@ -1,6 +1,6 @@
 import type { Champion, ChampionTag } from '../interfaces/championInterface';
 
-import { getChampionsFromJson, getFreeChampionFromJson } from '../services/championService';
+import { getChampionsFromJson, getFreeChampionFromJson, getChampion } from '../services/championService';
 
 const fetch = require('node-fetch');
 
@@ -15,18 +15,11 @@ export async function getChampions(region: string): Promise<Array<Champion> | bo
 }
 
 export async function getSingleChampion(region: string, id: string): Promise<Champion | boolean> {
-  // change this to http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion/Aatrox.json
   if (!id) {
     return false;
   }
 
-  const champions = (await getChampionsFromJson()) as Array<Champion>;
-
-  if (!champions) {
-    return false;
-  }
-
-  const champion = champions.find((item: Champion) => item.name === id);
+  const champion = await getChampion(id)
 
   if (!champion) {
     return false;
