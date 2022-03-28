@@ -18,17 +18,21 @@ export const getChampionsFromJson = async (): Promise<Array<Champion> | boolean>
 };
 
 export const getChampion = async (id: string): Promise<Champion | boolean> => {
-  const response = await fetch(
-    `http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion/${id}.json`
-  )
+  try {
+    const response = await fetch(
+      `http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion/${id}.json`
+    );
 
-  const championJson = await response.json();
-  if(championJson) {
-    return championJson
+    const championJson = await response.json();
+
+    if (championJson) {
+      return championJson;
+    }
+  } catch {
+    return false;
   }
-
   return false;
-}
+};
 
 export const getFreeChampionFromJson = async (
   array: Array<number>

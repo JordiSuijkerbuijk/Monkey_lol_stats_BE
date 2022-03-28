@@ -1,21 +1,21 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response } from 'express';
 
 import {
   getFreeChampionRotation,
   getChampions,
   getSingleChampion,
   getChampionsWithType,
-} from "../controllers/championController";
+} from '../controllers/championController';
 
-import { ChampionTag } from "../interfaces/championInterface";
+import { ChampionTag } from '../interfaces/championInterface';
 
 const router = express.Router();
 
-router.get("/", async (req: Request, res: Response) => {
-  const champions = await getChampions("euw1");
+router.get('/', async (req: Request, res: Response) => {
+  const champions = await getChampions('euw1');
 
   if (!champions) {
-    res.status(404).send({ error: "Not able to find champions" });
+    res.status(404).send({ error: 'Not able to find champions' });
     return;
   }
 
@@ -23,13 +23,11 @@ router.get("/", async (req: Request, res: Response) => {
   return;
 });
 
-router.get("/rotation", async (req: Request, res: Response) => {
-  const rotation = await getFreeChampionRotation("euw1");
+router.get('/rotation', async (req: Request, res: Response) => {
+  const rotation = await getFreeChampionRotation('euw1');
 
   if (!rotation) {
-    res
-      .status(404)
-      .send({ error: "Not able to find the free champion rotation" });
+    res.status(404).send({ error: 'Not able to find the free champion rotation' });
     return;
   }
 
@@ -37,18 +35,18 @@ router.get("/rotation", async (req: Request, res: Response) => {
   return;
 });
 
-router.get("/:champion", async (req: Request, res: Response) => {
+router.get('/:champion', async (req: Request, res: Response) => {
   const params = req.params;
 
   if (!params.champion || !params) {
-    res.status(404).send({ error: "No champion found in request" });
+    res.status(404).send({ status: 404, error: 'Not able to find champions' });
     return;
   }
 
-  const champion = await getSingleChampion("euw1", params.champion);
+  const champion = await getSingleChampion('euw1', params.champion);
 
   if (!champion) {
-    res.status(404).send({ error: "Not able to find champions" });
+    res.status(404).send({ status: 404, error: 'Not able to find champions' });
     return;
   }
 
@@ -56,17 +54,17 @@ router.get("/:champion", async (req: Request, res: Response) => {
   return;
 });
 
-router.get("/type/:type", async (req: Request, res: Response) => {
+router.get('/type/:type', async (req: Request, res: Response) => {
   const params = req.params;
   if (!params || !params.type) {
-    res.status(400).send({ error: "No type was found in request" });
+    res.status(400).send({ error: 'No type was found in request' });
     return;
   }
 
   const champions = await getChampionsWithType(params.type as ChampionTag);
 
   if (!champions) {
-    res.status(404).send({ error: "Not able to find champions with type" });
+    res.status(404).send({ error: 'Not able to find champions with type' });
     return;
   }
 
