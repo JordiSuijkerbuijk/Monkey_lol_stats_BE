@@ -1,18 +1,27 @@
-import type {CurrentGameInfo} from '../interfaces/gameInterface';
+import { getSpectateBySummonerId } from '../services/gameService';
+import { getSummoner } from '../controllers/summonerController';
 
-import { Response } from "express";
+import type { CurrentGameInfo } from '../interfaces/gameInterface';
 
-const fetch = require('node-fetch')
+export async function getLiveGameData(
+  summoner: string,
+  region: string
+): Promise<CurrentGameInfo | undefined> {
+  //function fetches summoner from summoner api to retrieve the summonerId. This
+  //summoner id is needed in the getSpectateBySummonerId function.
+  const summonerResponse = await getSummoner(summoner, region);
 
-export async function getSpectateBySummonerId(summonerId: string, region: string): Promise<CurrentGameInfo> {
-    const response = await fetch(`https://${region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerId}`, {
-        method: 'GET',
-        headers: {
-            "X-Riot-Token": "RGAPI-9f540de9-b486-4152-b7e6-3aa80b36fc09"
-        }
-    })
+  if (!summonerResponse) {
+    return undefined;
+  }
 
-    const spectateData = await response.json();
+  //function fetches live game data using the spectate api.
+  const spectateData = await getSpectateBySummonerId(summonerResponse.id, region);
 
-    return spectateData;
+  //If spectateData is a undefined this means the
+  if (spectateData) {
+    return undefined;
+  }
+
+  return spectateData;
 }

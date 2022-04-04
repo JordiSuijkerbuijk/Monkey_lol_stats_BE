@@ -3,6 +3,8 @@ import express, { Request, Response } from 'express';
 import clashController from '../controllers/clashController';
 import { getSummoner, getParticipants } from '../controllers/summonerController';
 
+import type { Summoner } from '../interfaces/summonerInterface';
+
 const router = express.Router();
 
 router.get('/clash_dashboard/:summonerName', async (req: Request, res: Response) => {
@@ -14,11 +16,9 @@ router.get('/clash_dashboard/:summonerName', async (req: Request, res: Response)
 
   const summonerName = params.summonerName;
 
-  const summoner = await getSummoner(summonerName, 'na1');
+  const summoner = (await getSummoner(summonerName, 'na1')) as Summoner;
 
-  const test = await getParticipants(summonerName);
-
-  console.log('test', test);
+  // const test = await getParticipants(summonerName);
 
   if (!summoner) {
     res.send({ status: 404, error: 'No summoner found' });

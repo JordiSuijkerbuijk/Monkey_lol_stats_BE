@@ -2,7 +2,7 @@ import type { Champion } from '../interfaces/championInterface';
 
 const fetch = require('node-fetch');
 
-export const getChampionsFromJson = async (): Promise<Array<Champion> | boolean> => {
+export const getChampionsFromJson = async (): Promise<Array<Champion> | undefined> => {
   const response = await fetch(
     'http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json'
   );
@@ -14,10 +14,10 @@ export const getChampionsFromJson = async (): Promise<Array<Champion> | boolean>
     return array;
   }
 
-  return false;
+  return undefined;
 };
 
-export const getChampion = async (id: string): Promise<Champion | boolean> => {
+export const getChampion = async (id: string): Promise<Champion | undefined> => {
   try {
     const response = await fetch(
       `http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion/${id}.json`
@@ -29,14 +29,14 @@ export const getChampion = async (id: string): Promise<Champion | boolean> => {
       return championJson;
     }
   } catch {
-    return false;
+    return undefined;
   }
-  return false;
+  return undefined;
 };
 
 export const getFreeChampionFromJson = async (
   array: Array<number>
-): Promise<Array<Champion> | boolean> => {
+): Promise<Array<Champion> | undefined> => {
   const response = await fetch(
     'http://ddragon.leagueoflegends.com/cdn/12.5.1/data/en_US/champion.json'
   );
@@ -55,5 +55,5 @@ export const getFreeChampionFromJson = async (
     return data;
   }
 
-  return false;
+  return undefined;
 };

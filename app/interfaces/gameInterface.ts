@@ -1,26 +1,30 @@
-import {CurrentGameParticipant} from './summonerInterface'
+import { CurrentGameParticipant } from './summonerInterface';
 
-export interface Perk {
-    perksIds: Array<number>,
-    perkStyle: number,
-    perkSubStyle: number
-}
+export type CurrentGameInfo = {
+  gameId: number;
+  gameType: string;
+  gameStartTime: number;
+  mapId: number;
+  gameLength: number;
+  platformId: string;
+  gameMode: string;
+  bannedChampions: Array<BannedChampion>;
+  participants: Array<CurrentGameParticipant>;
+};
 
-export interface CurrentGameInfo {
-    gameId: number,
-    gameType: string,
-    gameStartTime: number,
-    mapId: number,
-    gameLength: number,
-    platformId: string,
-    gameMode: string,
-    bannedChampions: Array<BannedChampion>
-    participants: Array<CurrentGameParticipant>
+export type Live = {
+  region: string;
+  summonerId: string;
+};
 
-}
+export type Perk = {
+  perksIds: Array<number>;
+  perkStyle: number;
+  perkSubStyle: number;
+};
 
-export interface BannedChampion {
-    pickTurn: number,
-    championId: number,
-    teamId: number,
-}
+type BannedChampion = {
+  pickTurn: number;
+  championId: number;
+  teamId: number;
+};

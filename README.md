@@ -5,3 +5,8 @@
 ### Get team Stats
 
 - Inside this task we are collecting all the recent match history of the monkeys. Based on our own set variables we will create a object that we will save to firebase for later reference. To run it install this 'npm install -g ts-node typescript '@types/node'. Then run 'ts-node getTeamStats.ts';.
+
+# TODO:
+
+- Check the possibilities to return errors from service/controllers. Maybe
+  using an error type.

@@ -1,34 +1,40 @@
 import type { Champion, ChampionTag } from '../interfaces/championInterface';
 
-import { getChampionsFromJson, getFreeChampionFromJson, getChampion } from '../services/championService';
+import {
+  getChampionsFromJson,
+  getFreeChampionFromJson,
+  getChampion,
+} from '../services/championService';
 
 const fetch = require('node-fetch');
 
-export async function getChampions(region: string): Promise<Array<Champion> | boolean> {
+export async function getChampions(region: string): Promise<Array<Champion> | undefined> {
   const champions = await getChampionsFromJson();
 
   if (!champions) {
-    return false;
+    return undefined;
   }
 
   return champions;
 }
 
-export async function getSingleChampion(region: string, id: string): Promise<Champion | boolean> {
+export async function getSingleChampion(region: string, id: string): Promise<Champion | undefined> {
   if (!id) {
-    return false;
+    return undefined;
   }
 
-  const champion = await getChampion(id)
+  const champion = await getChampion(id);
 
   if (!champion) {
-    return false;
+    return undefined;
   }
 
   return champion;
 }
 
-export async function getFreeChampionRotation(region: string): Promise<Array<Champion> | boolean> {
+export async function getFreeChampionRotation(
+  region: string
+): Promise<Array<Champion> | undefined> {
   const response = await fetch(
     `https://${region}.api.riotgames.com/lol/platform/v3/champion-rotations`,
     {
@@ -42,7 +48,7 @@ export async function getFreeChampionRotation(region: string): Promise<Array<Cha
   const freeChampionRotationData = await response.json();
 
   if (!freeChampionRotationData && freeChampionRotationData.freeChampionIds) {
-    return false;
+    return undefined;
   }
 
   const freeChampions = await getFreeChampionFromJson(freeChampionRotationData.freeChampionIds);
@@ -50,20 +56,22 @@ export async function getFreeChampionRotation(region: string): Promise<Array<Cha
   return freeChampions;
 }
 
-export async function getChampionsWithType(championClass: ChampionTag): Promise<Array<Champion> | boolean > {
+export async function getChampionsWithType(
+  championClass: ChampionTag
+): Promise<Array<Champion> | undefined> {
   const champions = await getChampionsFromJson();
 
-  if(!champions) {
-    return false;
+  if (!champions) {
+    return undefined;
   }
 
-  if(!Array.isArray(champions)) {
-    return false;
+  if (!Array.isArray(champions)) {
+    return undefined;
   }
 
-  const championsWithClass = champions.filter(champ => {
-    return champ.tags.indexOf(championClass) >= 0
-  }) 
+  const championsWithClass = champions.filter((champ) => {
+    return champ.tags.indexOf(championClass) >= 0;
+  });
 
-  return championsWithClass
+  return championsWithClass;
 }
