@@ -2,31 +2,38 @@ import express, { Request, Response } from 'express';
 
 import { getLiveGameData } from '../controllers/gameController';
 
-import type { Live } from '../interfaces/gameInterface';
+import { CheckParams } from '../utils/checkParams';
+
+import type { Live, liveGameData } from '../types/gameType';
+import type { Error } from '../types/ErrorType';
 
 const router = express.Router();
+
+router.get('/match-history', async (req: Request, res: Response) => {
+  const params: Live = req.query as Live;
+
+  CheckParams(params, res);
+
+  res.status(200).send({ data: {} });
+  return;
+});
 
 router.get('/live', async (req: Request, res: Response) => {
   const params: Live = req.query as Live;
 
-  if (!params.summonerId) {
-    res.status(404).send({ status: 404, error: 'Not able to find summoner' });
-    return;
-  }
-
-  if (!params.region) {
-    res.status(404).send({ status: 404, error: 'Not able to find region' });
-    return;
-  }
+  CheckParams(params, res);
 
   const spectate = await getLiveGameData(params.summonerId, params.region);
 
-  if (!spectate) {
-    res.status(404).send({ status: 500, error: 'Something went wrong trying to fetch data' });
+  if ((<Error>spectate).status_code) {
+    const error = spectate as Error;
+    res.status(error.status_code).send({ status: error.status_code, message: error.message });
     return;
   }
 
-  res.status(200).send({ data: spectate });
+  const gameData = spectate as liveGameData;
+
+  res.status(200).send({ data: gameData });
   return;
 });
 

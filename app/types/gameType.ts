@@ -1,4 +1,9 @@
-import { CurrentGameParticipant } from './summonerInterface';
+import type { CurrentGameParticipant, Summoner } from './summonerType';
+
+export type liveGameData = {
+  game: CurrentGameInfo;
+  summoner: Summoner;
+};
 
 export type CurrentGameInfo = {
   gameId: number;

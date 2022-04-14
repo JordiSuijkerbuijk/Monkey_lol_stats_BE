@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express';
 import clashController from '../controllers/clashController';
 import { getSummoner, getParticipants } from '../controllers/summonerController';
 
-import type { Summoner } from '../interfaces/summonerInterface';
+import type { Summoner } from '../types/summonerType';
 
 const router = express.Router();
 

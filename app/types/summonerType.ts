@@ -1,6 +1,6 @@
-import { Perk } from './gameInterface';
+import { Perk } from './gameType';
 
-export interface Summoner {
+export type Summoner = {
   accountId: string;
   profileIconId: number;
   revisionDate: number;
@@ -8,7 +8,7 @@ export interface Summoner {
   id: string;
   puuid: string;
   summonerLevel: number;
-}
+};
 
 export interface CurrentGameParticipant {
   championId: number;

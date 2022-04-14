@@ -7,15 +7,17 @@ import {
   getChampionsWithType,
 } from '../controllers/championController';
 
-import { ChampionTag } from '../interfaces/championInterface';
+import type { ChampionTag } from '../types/championType';
+import type { Error } from '../types/ErrorType';
 
 const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
   const champions = await getChampions('euw1');
 
-  if (!champions) {
-    res.status(404).send({ error: 'Not able to find champions' });
+  if ((<Error>champions).status_code) {
+    const error = champions as Error;
+    res.status(error.status_code).send({ status: error.status_code, message: error.message });
     return;
   }
 
@@ -26,8 +28,9 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/rotation', async (req: Request, res: Response) => {
   const rotation = await getFreeChampionRotation('euw1');
 
-  if (!rotation) {
-    res.status(404).send({ error: 'Not able to find the free champion rotation' });
+  if ((<Error>rotation).status_code) {
+    const error = rotation as Error;
+    res.status(error.status_code).send({ status: error.status_code, message: error.message });
     return;
   }
 
@@ -45,8 +48,9 @@ router.get('/:champion', async (req: Request, res: Response) => {
 
   const champion = await getSingleChampion('euw1', params.champion);
 
-  if (!champion) {
-    res.status(404).send({ status: 404, error: 'Not able to find champions' });
+  if ((<Error>champion).status_code) {
+    const error = champion as Error;
+    res.status(error.status_code).send({ status: error.status_code, message: error.message });
     return;
   }
 
@@ -63,8 +67,9 @@ router.get('/type/:type', async (req: Request, res: Response) => {
 
   const champions = await getChampionsWithType(params.type as ChampionTag);
 
-  if (!champions) {
-    res.status(404).send({ error: 'Not able to find champions with type' });
+  if ((<Error>champions).status_code) {
+    const error = champions as Error;
+    res.status(error.status_code).send({ status: error.status_code, message: error.message });
     return;
   }
 
