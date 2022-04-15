@@ -36,8 +36,8 @@ export const getChampion = async (id: string): Promise<Champion | Error> => {
 
     //We will not be checking this response for status_code since the source is
     //basically a hosted JSON file and not an API
-    if (championJson) {
-      return championJson;
+    if (championJson && championJson.data && championJson.data[id]) {
+      return championJson.data[id];
     }
   } catch (e) {
     //TODO: set statuscode here

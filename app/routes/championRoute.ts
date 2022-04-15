@@ -21,7 +21,7 @@ router.get('/', async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(200).send({ data: champions });
+  res.status(200).send(champions);
   return;
 });
 
