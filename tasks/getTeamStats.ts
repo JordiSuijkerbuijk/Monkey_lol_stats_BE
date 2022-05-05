@@ -4,6 +4,7 @@ const db = require('../utils/db.ts');
 
 import { RiotClass } from '../utils/riot';
 const riotUtil = new RiotClass(process.env.RIOTKEY);
+const monkeys:Array<String> = [];
 
 // Steps get recent 100 matches
 // check if people played together
@@ -16,14 +17,23 @@ const riotUtil = new RiotClass(process.env.RIOTKEY);
 // Also refractor the part where we get summonerId because we will save that in the DB;
 db.collection('summoners')
   .get()
-  .then((monkeys:any) => {
-    monkeys.forEach((monkey:any) => {
-      const summonerId = monkey.data().puuid;
-      console.log(summonerId);
+  .then((players:any) => {
+    // Fill monkeys with puuid of players
+    players.forEach((monkey:any) => {
+      monkeys.push(monkey.data().puuid);
+    });
+
+    console.log(monkeys);
+    players.forEach((player:any) => {
+      
+      const summonerId = player.data().puuid;
+      // Get all match histories from summoner
       riotUtil.getMatchHistory(summonerId).then((matchHistory) => {
+        // Get details like players and game stats...
         riotUtil.getMatchDetails(matchHistory[0]).then((matchDetails) => {
-          console.log(matchDetails);
-          // const stats = collectData(matchDetails);
+          // Check if people played together
+          
+
           return;
         });
       });
