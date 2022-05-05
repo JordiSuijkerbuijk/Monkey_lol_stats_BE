@@ -17,29 +17,34 @@ const monkeys:Array<String> = [];
 // Also refractor the part where we get summonerId because we will save that in the DB;
 db.collection('summoners')
   .get()
-  .then((players:any) => {
-    // Fill monkeys with puuid of players
-    players.forEach((monkey:any) => {
-      monkeys.push(monkey.data().puuid);
-    });
-
-    console.log(monkeys);
-    players.forEach((player:any) => {
-      
-      const summonerId = player.data().puuid;
-      // Get all match histories from summoner
+  .then(async (players:any) => {
+    const playerPuuid = await getMonkeysPuuid(players);
+    
+    playerPuuid.forEach((summonerId:String) => {
       riotUtil.getMatchHistory(summonerId).then((matchHistory) => {
         // Get details like players and game stats...
-        riotUtil.getMatchDetails(matchHistory[0]).then((matchDetails) => {
-          // Check if people played together
-          
+          riotUtil.getMatchDetails(matchHistory[0]).then((matchDetails) => {
+            console.log(matchDetails);
+            // Check if people played together           
 
-          return;
+            return;
+          });
         });
-      });
-    });
+    })
   });
 
+
+
+// Magic code
+function getMonkeysPuuid(players:any) {
+  const monkeys:Array<Promise<String>> = [];
+
+  players.forEach((player:any) => {
+    monkeys.push(riotUtil.getSummonerId(player.data().username));
+  });
+
+  return Promise.all(monkeys);
+}
 
 async function collectData(matchDetails:string) {
   console.log(matchDetails);

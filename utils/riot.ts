@@ -7,7 +7,7 @@ export class RiotClass {
         this.fetch = require('node-fetch');
     }
 
-    public async getSummonerId (username:String){
+    public async getSummonerId(username:String){
         const summonerData = await this.fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}`, {
             headers: {
                 'X-Riot-Token': this.apiKey,
